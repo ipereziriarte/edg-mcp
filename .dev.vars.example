@@ -1,0 +1,6 @@
+# Copy to .dev.vars for `npm run dev`. Never commit .dev.vars.
+# Your EDG API token (see README: "Getting your EDG token").
+EDG_TOKEN=
+# Any long random string; clients must send it to call the MCP endpoint.
+# Generate one with: openssl rand -hex 32
+MCP_AUTH_TOKEN=

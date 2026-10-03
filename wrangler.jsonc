@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "edg-mcp",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true }
+  // Secrets (never commit them):
+  //   npx wrangler secret put EDG_TOKEN
+  //   npx wrangler secret put MCP_AUTH_TOKEN
+}
