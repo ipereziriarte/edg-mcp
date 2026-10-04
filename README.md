@@ -62,10 +62,14 @@ You'll get a URL like `https://edg-mcp.<your-subdomain>.workers.dev`.
 
 ### 3. Connect a client
 
-The MCP endpoint is protected by `MCP_AUTH_TOKEN`. Pass it either way:
+The MCP endpoint is protected by `MCP_AUTH_TOKEN`. Pass it in any of these ways:
 
-- **Header** (Claude Code, MCP Inspector, most clients): `Authorization: Bearer <MCP_AUTH_TOKEN>` → `https://…/mcp`
-- **In the URL**, for clients that only take a URL, such as claude.ai custom connectors: `https://…/mcp/<MCP_AUTH_TOKEN>`
+- **`Authorization: Bearer <MCP_AUTH_TOKEN>`** header, with URL `https://…/mcp`. Works with Claude Code, MCP Inspector and most clients.
+- **`X-API-Key: <MCP_AUTH_TOKEN>`** header, with URL `https://…/mcp`. Use this for clients that reserve `Authorization` for OAuth.
+- **In the URL**: `https://…/mcp/<MCP_AUTH_TOKEN>`, for clients that only take a URL.
+
+**claude.ai custom connector:** Customize → Connectors → *+ Add* → *Add custom connector*:
+URL `https://…/mcp`, Authentication **No sign-in**, Request header `X-API-Key` = your `MCP_AUTH_TOKEN`.
 
 Claude Code example:
 

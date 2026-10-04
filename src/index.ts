@@ -21,7 +21,8 @@ function timingSafeEqual(a: string, b: string): boolean {
 }
 
 /**
- * Accepts the shared secret as `Authorization: Bearer <token>` or as the last
+ * Accepts the shared secret as `Authorization: Bearer <token>`, `X-API-Key: <token>`
+ * (for clients that reserve Authorization for OAuth, like claude.ai), or as the last
  * path segment (`/mcp/<token>`), because some MCP clients (e.g. claude.ai
  * custom connectors without OAuth) only let you configure a URL.
  */
@@ -29,6 +30,8 @@ export function isAuthorized(req: Request, env: Env): boolean {
   if (!env.MCP_AUTH_TOKEN) return false;
   const header = req.headers.get("authorization");
   if (header?.startsWith("Bearer ") && timingSafeEqual(header.slice(7), env.MCP_AUTH_TOKEN)) return true;
+  const apiKey = req.headers.get("x-api-key");
+  if (apiKey && timingSafeEqual(apiKey, env.MCP_AUTH_TOKEN)) return true;
   const parts = new URL(req.url).pathname.split("/").filter(Boolean);
   return parts.length === 2 && parts[0] === "mcp" && timingSafeEqual(parts[1], env.MCP_AUTH_TOKEN);
 }

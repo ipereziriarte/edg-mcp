@@ -143,6 +143,8 @@ describe("worker", () => {
 
   it("accepts the secret as bearer header or path segment", () => {
     expect(isAuthorized(new Request("https://x.dev/mcp", { headers: { authorization: "Bearer secret" } }), env)).toBe(true);
+    expect(isAuthorized(new Request("https://x.dev/mcp", { headers: { "x-api-key": "secret" } }), env)).toBe(true);
+    expect(isAuthorized(new Request("https://x.dev/mcp", { headers: { "x-api-key": "nope" } }), env)).toBe(false);
     expect(isAuthorized(new Request("https://x.dev/mcp/secret"), env)).toBe(true);
     expect(isAuthorized(new Request("https://x.dev/mcp/wrong"), env)).toBe(false);
   });
