@@ -48,6 +48,8 @@ with a fresh server per request and no storage.
 
 ### 2. Deploy to Cloudflare Workers
 
+Requires **Node.js 22.12+** (`nvm use` picks it up from `.nvmrc`).
+
 ```bash
 npm install
 npx wrangler login
