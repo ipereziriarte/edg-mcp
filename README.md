@@ -48,7 +48,7 @@ with a fresh server per request and no storage.
 
 ### 2. Deploy to Cloudflare Workers
 
-Requires **Node.js 22.12+** (`nvm use` picks it up from `.nvmrc`).
+Requires **Node.js 22.12+** (pinned for Volta in `package.json`, and in `.nvmrc` for nvm).
 
 ```bash
 npm install
